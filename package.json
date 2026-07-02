@@ -1,0 +1,96 @@
+{
+  "name": "pokedex-challenge",
+  "main": "expo-router/entry",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@shopify/flash-list": "2.0.2",
+    "@tanstack/react-query": "^5.101.2",
+    "axios": "^1.18.1",
+    "expo": "~57.0.1",
+    "expo-constants": "~57.0.2",
+    "expo-image": "~57.0.0",
+    "expo-linking": "~57.0.1",
+    "expo-router": "~57.0.2",
+    "expo-splash-screen": "~57.0.1",
+    "expo-status-bar": "~57.0.0",
+    "expo-system-ui": "~57.0.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.0",
+    "react-native-gesture-handler": "~2.32.0",
+    "react-native-mmkv": "^4.3.2",
+    "react-native-reanimated": "4.5.0",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-screens": "4.25.2",
+    "react-native-svg": "^15.15.5",
+    "react-native-web": "~0.21.0",
+    "react-native-worklets": "0.10.0",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.10.0"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "7.29.7",
+    "@react-native/jest-preset": "0.86.0",
+    "@testing-library/react-native": "^14.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/react": "~19.2.2",
+    "babel-jest": "^29.7.0",
+    "eslint": "^9.39.4",
+    "eslint-config-expo": "^57.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "jest": "^29.7.0",
+    "jest-expo": "^57.0.0",
+    "prettier": "^3.9.4",
+    "ts-node": "^10.9.2",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --forceExit",
+    "coverage": "jest --coverage --forceExit",
+    "maestro:all": "maestro test .maestro/splash_screen.yaml && maestro test .maestro/list_and_navigate.yaml && maestro test .maestro/favorites.yaml && maestro test .maestro/type_filter.yaml && maestro test .maestro/scroll_to_top.yaml",
+    "maestro:splash": "maestro test .maestro/splash_screen.yaml",
+    "maestro:list": "maestro test .maestro/list_and_navigate.yaml",
+    "maestro:favorites": "maestro test .maestro/favorites.yaml",
+    "maestro:filter": "maestro test .maestro/type_filter.yaml",
+    "maestro:scroll": "maestro test .maestro/scroll_to_top.yaml"
+  },
+  "jest": {
+    "preset": "jest-expo",
+    "setupFiles": [
+      "<rootDir>/jest.setup.ts"
+    ],
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/src/$1"
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!src/**/__tests__/**",
+      "!src/app/**",
+      "!src/**/*.d.ts",
+      "!src/presentation/components/**",
+      "!src/presentation/screens/**",
+      "!src/presentation/theme/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 50,
+        "functions": 45,
+        "lines": 35,
+        "statements": 35
+      }
+    },
+    "coverageReporters": [
+      "text",
+      "text-summary",
+      "lcov"
+    ]
+  }
+}
