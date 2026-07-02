@@ -10,8 +10,7 @@ Technical assessment adapted from native Android to React Native/Expo, following
 - [Requirements](#requirements)
 - [Getting Started](#getting-started)
 - [Available Scripts](#available-scripts)
-- [Testing](#testing)
-- [Manual QA Checklist](#manual-qa-checklist)
+- [Testing & QA](#testing--qa)
 
 ## 📱 Previews & Demo
 
@@ -80,7 +79,7 @@ src/
 | Dependency Injection  | TSyringe                         | Explicit registration via `useFactory` in `src/core/di/container.ts` |
 | Local persistence     | `react-native-mmkv`              | Read-through/write-through cache at the repository level, feeding `initialData` into TanStack Query (offline availability on relaunch) |
 | Images                | `expo-image`                     | Native caching                                                     |
-| Lists                 | `@shopify/flash-list`            | Virtualization + memoization                                       |
+| Lists                 | `FlatList` (React Native)        | Virtualization + memoization                                       |
 
 ## Requirements
 
@@ -116,9 +115,9 @@ pnpm start        # expo start --dev-client
 | `pnpm run coverage`   | Run Jest tests and output coverage reports      |
 | `pnpm run maestro:all` | Run all E2E Maestro flows                      |
 
-## Testing
+## Testing & QA
 
-### Unit and Integration Tests (Jest)
+Local QA gate, run in order before opening a PR:
 
 ```bash
 pnpm run typecheck
@@ -127,11 +126,26 @@ pnpm test
 pnpm run coverage
 ```
 
+There is no CI pipeline configured yet — this sequence is the manual gate.
+
+### Unit and Integration Tests (Jest)
+
 Covers:
 
 - **Domain use cases:** `GetPokemonListUseCase`, `GetPokemonDetailUseCase`, `ToggleFavoriteUseCase`
 - **Data mappers and sources:** `pokemonMapper`, `PokemonLocalDataSourceImpl`, `FavoritesRepositoryImpl`
 - **Repositories and Hooks:** `PokemonRepositoryImpl`, `usePokemonList`
+
+Coverage is collected from `src/**/*.{ts,tsx}`, excluding `app/`, `presentation/components`, `presentation/screens`, `presentation/theme`, and test files themselves. Minimum thresholds enforced in `package.json`:
+
+| Metric     | Threshold |
+| ---------- | --------- |
+| Branches   | 50%       |
+| Functions  | 45%       |
+| Lines      | 35%       |
+| Statements | 35%       |
+
+<img src="./previews/integration-unit-test.png" width="600" alt="Jest unit and integration test run" />
 
 ### End-to-End Tests (Maestro)
 
@@ -142,6 +156,33 @@ Maestro flows are defined in the `.maestro/` directory:
 - **Favorites (`favorites.yaml`):** Verifies marking/unmarking favorites and persistence.
 - **Type Filter (`type_filter.yaml`):** Verifies filtering list by type and resetting.
 - **Scroll to Top (`scroll_to_top.yaml`):** Verifies that the scroll-to-top FAB appears on scroll down and successfully scrolls to the top.
+
+<table align="center">
+  <tr>
+    <td align="center"><b>Splash Screen</b></td>
+    <td align="center"><b>List & Navigate</b></td>
+  </tr>
+  <tr>
+    <td><img src="./previews/e2e-splashscreen.png" width="220" alt="E2E Splash Screen flow" /></td>
+    <td><img src="./previews/e2e-list-navigate.png" width="220" alt="E2E List and Navigate flow" /></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Favorites</b></td>
+    <td align="center"><b>Type Filter</b></td>
+  </tr>
+  <tr>
+    <td><img src="./previews/e2e-favorites.png" width="220" alt="E2E Favorites flow" /></td>
+    <td><img src="./previews/e2e-filter.png" width="220" alt="E2E Type Filter flow" /></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Scroll to Top</b></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><img src="./previews/e2e-scroll-to-top.png" width="220" alt="E2E Scroll to Top flow" /></td>
+    <td></td>
+  </tr>
+</table>
 
 To run E2E flows (ensure the app is running on a simulator or device first):
 
