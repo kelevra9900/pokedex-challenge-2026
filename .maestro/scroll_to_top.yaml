@@ -1,0 +1,15 @@
+appId: com.kelevra9900.pokedexchallenge
+---
+- launchApp
+- assertVisible:
+        text: "Pokédex"
+- scroll
+- scroll
+- extendedWaitUntil:
+        visible:
+              label: "Volver al inicio"
+        timeout: 3000
+- tapOn:
+        label: "Volver al inicio"
+- assertVisible:
+        text: "Pokédex"

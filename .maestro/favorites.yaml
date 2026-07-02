@@ -1,0 +1,43 @@
+appId: com.kelevra9900.pokedexchallenge
+---
+- launchApp
+- assertVisible:
+        text: "Pokédex"
+- tapOn:
+        id: "search-pokemon"
+- inputText: "charizard"
+- assertVisible:
+        text: "charizard"
+- tapOn:
+        id: "pokemon-list-item-charizard"
+- assertVisible:
+        text: "charizard"
+- tapOn:
+        label: "Marcar como favorito"
+- assertVisible:
+        label: "Quitar de favoritos"
+- tapOn:
+        label: "Volver"
+- tapOn:
+        label: "Limpiar búsqueda"
+- tapOn:
+        label: "Filtrar por favoritos"
+- assertVisible:
+        text: "charizard"
+- assertNotVisible:
+        text: "bulbasaur"
+- tapOn:
+        label: "Filtrar por favoritos"
+- assertVisible:
+        text: "bulbasaur"
+- tapOn:
+        id: "search-pokemon"
+- inputText: "charizard"
+- tapOn:
+        id: "pokemon-list-item-charizard"
+- tapOn:
+        label: "Quitar de favoritos"
+- assertVisible:
+        label: "Marcar como favorito"
+- tapOn:
+        label: "Volver"

@@ -1,0 +1,22 @@
+appId: com.kelevra9900.pokedexchallenge
+---
+- stopApp
+- launchApp:
+        clearState: true
+# Esperar a que cargue el bundle JS y monte el splash animado (splash nativo -> splash JS)
+- waitForAnimationToEnd:
+        timeout: 5000
+- extendedWaitUntil:
+        visible:
+              id: "title-pokedex"
+        timeout: 5000
+- extendedWaitUntil:
+        visible:
+              id: "explore-world-pokemon"
+        timeout: 3000
+- extendedWaitUntil:
+        visible:
+              id: "search-pokemon"
+        timeout: 5000
+- assertVisible:
+        id: "pokedex-title"

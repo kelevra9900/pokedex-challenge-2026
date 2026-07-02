@@ -1,0 +1,30 @@
+appId: com.kelevra9900.pokedexchallenge
+---
+- launchApp
+- assertVisible:
+          text: "Pokédex"
+- tapOn:
+          id: "search-pokemon"
+- inputText: "bulb"
+- assertVisible:
+          text: "bulbasaur"
+- tapOn:
+          id: "pokemon-list-item-bulbasaur"
+- assertVisible:
+          text: "bulbasaur"
+- assertVisible:
+          text: "grass"
+- assertVisible:
+          text: "Normal"
+- tapOn:
+          id: "shiny-toggle-button"
+- assertVisible:
+          text: "✨ Shiny"
+- tapOn:
+          id: "shiny-toggle-button"
+- assertVisible:
+          text: "💫 Normal"
+- tapOn:
+          label: "Volver"
+- assertVisible:
+          text: "Pokédex"

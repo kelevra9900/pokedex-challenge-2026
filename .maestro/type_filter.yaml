@@ -1,0 +1,28 @@
+# Maestro E2E — Filtro por Tipo
+# Verifica que el filtro de tipo muestra solo Pokémon del tipo seleccionado
+# y que limpiar el filtro restaura el listado completo.
+#
+# Pre-requisito: La app debe estar corriendo en el simulador/dispositivo.
+# Ejecución: maestro test .maestro/type_filter.yaml
+
+appId: com.kelevra9900.pokedexchallenge
+---
+- launchApp
+- assertVisible:
+      text: "Pokédex"
+# Seleccionar filtro Fire
+- tapOn:
+      label: "Filtrar por tipo fire"
+- assertVisible:
+      label: "Filtrar por tipo fire"
+# Verificar que charmander (tipo fire) aparece en la lista
+- assertVisible:
+      text: "charmander"
+# Limpiar el filtro volviendo a "Todos"
+- tapOn:
+      label: "Todos los tipos"
+- assertVisible:
+      label: "Todos los tipos"
+# El listado completo debe volver a mostrar bulbasaur (tipo grass)
+- assertVisible:
+      text: "bulbasaur"
